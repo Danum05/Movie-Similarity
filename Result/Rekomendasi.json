@@ -1,0 +1,202 @@
+[
+    {
+        "source_id": 385687,
+        "id": 677179,
+        "title": "Creed III",
+        "overview": "After dominating the boxing world Adonis Creed has been thriving in both his career and family life. When a childhood friend and former boxing prodigy Damien Anderson resurfaces after serving a long sentence in prison he is eager to prove that he deserves his shot in the ring. The face-off between former friends is more than just a fight. To settle the score Adonis must put his future on the line to battle Damien — a fighter who has nothing to lose.",
+        "total_similarity_score": 0.34706461662384797,
+        "synopsis_score": 0.6801615415596198,
+        "actor_score": 0.0,
+        "genre_score": 0.25
+    },
+    {
+        "source_id": 385687,
+        "id": 640146,
+        "title": "Ant-Man and the Wasp: Quantumania",
+        "overview": "Super-Hero partners Scott Lang and Hope van Dyne along with with Hope's parents Janet van Dyne and Hank Pym and Scott's daughter Cassie Lang find themselves exploring the Quantum Realm interacting with strange new creatures and embarking on an adventure that will push them beyond the limits of what they thought possible.",
+        "total_similarity_score": 0.3312632375629707,
+        "synopsis_score": 0.6781580939074268,
+        "actor_score": 0.0,
+        "genre_score": 0.2
+    },
+    {
+        "source_id": 385687,
+        "id": 758323,
+        "title": "The Pope's Exorcist",
+        "overview": "Father Gabriele Amorth Chief Exorcist of the Vatican investigates a young boy's terrifying possession and ends up uncovering a centuries-old conspiracy the Vatican has desperately tried to keep hidden.",
+        "total_similarity_score": 0.31012085318642346,
+        "synopsis_score": 0.6253021329660586,
+        "actor_score": 0.0,
+        "genre_score": 0.2
+    },
+    {
+        "source_id": 385687,
+        "id": 502356,
+        "title": "The Super Mario Bros. Movie",
+        "overview": "While working underground to fix a water main Brooklyn plumbers—and brothers—Mario and Luigi are transported down a mysterious pipe and wander into a magical new world. But when the brothers are separated Mario embarks on an epic quest to find Luigi.",
+        "total_similarity_score": 0.25769066026258924,
+        "synopsis_score": 0.6442266506564731,
+        "actor_score": 0.0,
+        "genre_score": 0.0
+    },
+    {
+        "source_id": 502356,
+        "id": 640146,
+        "title": "Ant-Man and the Wasp: Quantumania",
+        "overview": "Super-Hero partners Scott Lang and Hope van Dyne along with with Hope's parents Janet van Dyne and Hank Pym and Scott's daughter Cassie Lang find themselves exploring the Quantum Realm interacting with strange new creatures and embarking on an adventure that will push them beyond the limits of what they thought possible.",
+        "total_similarity_score": 0.2771972232759796,
+        "synopsis_score": 0.5858502010470918,
+        "actor_score": 0.0,
+        "genre_score": 0.14285714285714285
+    },
+    {
+        "source_id": 502356,
+        "id": 385687,
+        "title": "Fast X",
+        "overview": "Over many missions and against impossible odds Dom Toretto and his family have outsmarted out-nerved and outdriven every foe in their path. Now they confront the most lethal opponent they've ever faced: A terrifying threat emerging from the shadows of the past who's fueled by blood revenge and who is determined to shatter this family and destroy everything—and everyone—that Dom loves forever.",
+        "total_similarity_score": 0.25769066026258924,
+        "synopsis_score": 0.6442266506564731,
+        "actor_score": 0.0,
+        "genre_score": 0.0
+    },
+    {
+        "source_id": 502356,
+        "id": 758323,
+        "title": "The Pope's Exorcist",
+        "overview": "Father Gabriele Amorth Chief Exorcist of the Vatican investigates a young boy's terrifying possession and ends up uncovering a centuries-old conspiracy the Vatican has desperately tried to keep hidden.",
+        "total_similarity_score": 0.23001534919345246,
+        "synopsis_score": 0.5750383729836311,
+        "actor_score": 0.0,
+        "genre_score": 0.0
+    },
+    {
+        "source_id": 502356,
+        "id": 677179,
+        "title": "Creed III",
+        "overview": "After dominating the boxing world Adonis Creed has been thriving in both his career and family life. When a childhood friend and former boxing prodigy Damien Anderson resurfaces after serving a long sentence in prison he is eager to prove that he deserves his shot in the ring. The face-off between former friends is more than just a fight. To settle the score Adonis must put his future on the line to battle Damien — a fighter who has nothing to lose.",
+        "total_similarity_score": 0.22201794257608365,
+        "synopsis_score": 0.5550448564402091,
+        "actor_score": 0.0,
+        "genre_score": 0.0
+    },
+    {
+        "source_id": 640146,
+        "id": 385687,
+        "title": "Fast X",
+        "overview": "Over many missions and against impossible odds Dom Toretto and his family have outsmarted out-nerved and outdriven every foe in their path. Now they confront the most lethal opponent they've ever faced: A terrifying threat emerging from the shadows of the past who's fueled by blood revenge and who is determined to shatter this family and destroy everything—and everyone—that Dom loves forever.",
+        "total_similarity_score": 0.3312632375629707,
+        "synopsis_score": 0.6781580939074268,
+        "actor_score": 0.0,
+        "genre_score": 0.2
+    },
+    {
+        "source_id": 640146,
+        "id": 677179,
+        "title": "Creed III",
+        "overview": "After dominating the boxing world Adonis Creed has been thriving in both his career and family life. When a childhood friend and former boxing prodigy Damien Anderson resurfaces after serving a long sentence in prison he is eager to prove that he deserves his shot in the ring. The face-off between former friends is more than just a fight. To settle the score Adonis must put his future on the line to battle Damien — a fighter who has nothing to lose.",
+        "total_similarity_score": 0.32546277966580006,
+        "synopsis_score": 0.6202514373534764,
+        "actor_score": 0.007874015748031496,
+        "genre_score": 0.25
+    },
+    {
+        "source_id": 640146,
+        "id": 502356,
+        "title": "The Super Mario Bros. Movie",
+        "overview": "While working underground to fix a water main Brooklyn plumbers—and brothers—Mario and Luigi are transported down a mysterious pipe and wander into a magical new world. But when the brothers are separated Mario embarks on an epic quest to find Luigi.",
+        "total_similarity_score": 0.2771972232759796,
+        "synopsis_score": 0.5858502010470918,
+        "actor_score": 0.0,
+        "genre_score": 0.14285714285714285
+    },
+    {
+        "source_id": 640146,
+        "id": 758323,
+        "title": "The Pope's Exorcist",
+        "overview": "Father Gabriele Amorth Chief Exorcist of the Vatican investigates a young boy's terrifying possession and ends up uncovering a centuries-old conspiracy the Vatican has desperately tried to keep hidden.",
+        "total_similarity_score": 0.23169658433661985,
+        "synopsis_score": 0.5792414608415496,
+        "actor_score": 0.0,
+        "genre_score": 0.0
+    },
+    {
+        "source_id": 677179,
+        "id": 385687,
+        "title": "Fast X",
+        "overview": "Over many missions and against impossible odds Dom Toretto and his family have outsmarted out-nerved and outdriven every foe in their path. Now they confront the most lethal opponent they've ever faced: A terrifying threat emerging from the shadows of the past who's fueled by blood revenge and who is determined to shatter this family and destroy everything—and everyone—that Dom loves forever.",
+        "total_similarity_score": 0.34706461662384797,
+        "synopsis_score": 0.6801615415596198,
+        "actor_score": 0.0,
+        "genre_score": 0.25
+    },
+    {
+        "source_id": 677179,
+        "id": 640146,
+        "title": "Ant-Man and the Wasp: Quantumania",
+        "overview": "Super-Hero partners Scott Lang and Hope van Dyne along with with Hope's parents Janet van Dyne and Hank Pym and Scott's daughter Cassie Lang find themselves exploring the Quantum Realm interacting with strange new creatures and embarking on an adventure that will push them beyond the limits of what they thought possible.",
+        "total_similarity_score": 0.32546277966580006,
+        "synopsis_score": 0.6202514373534764,
+        "actor_score": 0.007874015748031496,
+        "genre_score": 0.25
+    },
+    {
+        "source_id": 677179,
+        "id": 758323,
+        "title": "The Pope's Exorcist",
+        "overview": "Father Gabriele Amorth Chief Exorcist of the Vatican investigates a young boy's terrifying possession and ends up uncovering a centuries-old conspiracy the Vatican has desperately tried to keep hidden.",
+        "total_similarity_score": 0.23085347001925985,
+        "synopsis_score": 0.5771336750481496,
+        "actor_score": 0.0,
+        "genre_score": 0.0
+    },
+    {
+        "source_id": 677179,
+        "id": 502356,
+        "title": "The Super Mario Bros. Movie",
+        "overview": "While working underground to fix a water main Brooklyn plumbers—and brothers—Mario and Luigi are transported down a mysterious pipe and wander into a magical new world. But when the brothers are separated Mario embarks on an epic quest to find Luigi.",
+        "total_similarity_score": 0.22201794257608365,
+        "synopsis_score": 0.5550448564402091,
+        "actor_score": 0.0,
+        "genre_score": 0.0
+    },
+    {
+        "source_id": 758323,
+        "id": 385687,
+        "title": "Fast X",
+        "overview": "Over many missions and against impossible odds Dom Toretto and his family have outsmarted out-nerved and outdriven every foe in their path. Now they confront the most lethal opponent they've ever faced: A terrifying threat emerging from the shadows of the past who's fueled by blood revenge and who is determined to shatter this family and destroy everything—and everyone—that Dom loves forever.",
+        "total_similarity_score": 0.31012085318642346,
+        "synopsis_score": 0.6253021329660586,
+        "actor_score": 0.0,
+        "genre_score": 0.2
+    },
+    {
+        "source_id": 758323,
+        "id": 640146,
+        "title": "Ant-Man and the Wasp: Quantumania",
+        "overview": "Super-Hero partners Scott Lang and Hope van Dyne along with with Hope's parents Janet van Dyne and Hank Pym and Scott's daughter Cassie Lang find themselves exploring the Quantum Realm interacting with strange new creatures and embarking on an adventure that will push them beyond the limits of what they thought possible.",
+        "total_similarity_score": 0.23169658433661985,
+        "synopsis_score": 0.5792414608415496,
+        "actor_score": 0.0,
+        "genre_score": 0.0
+    },
+    {
+        "source_id": 758323,
+        "id": 677179,
+        "title": "Creed III",
+        "overview": "After dominating the boxing world Adonis Creed has been thriving in both his career and family life. When a childhood friend and former boxing prodigy Damien Anderson resurfaces after serving a long sentence in prison he is eager to prove that he deserves his shot in the ring. The face-off between former friends is more than just a fight. To settle the score Adonis must put his future on the line to battle Damien — a fighter who has nothing to lose.",
+        "total_similarity_score": 0.23085347001925985,
+        "synopsis_score": 0.5771336750481496,
+        "actor_score": 0.0,
+        "genre_score": 0.0
+    },
+    {
+        "source_id": 758323,
+        "id": 502356,
+        "title": "The Super Mario Bros. Movie",
+        "overview": "While working underground to fix a water main Brooklyn plumbers—and brothers—Mario and Luigi are transported down a mysterious pipe and wander into a magical new world. But when the brothers are separated Mario embarks on an epic quest to find Luigi.",
+        "total_similarity_score": 0.23001534919345246,
+        "synopsis_score": 0.5750383729836311,
+        "actor_score": 0.0,
+        "genre_score": 0.0
+    }
+]
