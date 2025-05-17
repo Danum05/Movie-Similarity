@@ -7,116 +7,124 @@ import pandas as pd
 
 # Konfigurasi logging
 logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger("Node2Vec")
+logger = logging.getLogger("Node2Vec-PerRelasi")
 
-# Koneksi ke database Neo4j
+# Koneksi ke Neo4j
 graph = Graph("bolt://localhost:7687", auth=("neo4j", "211524037"))
 
-# Set path file hasil
-base_dir = os.path.dirname(os.path.abspath(__file__))
-EMBEDDING_FILE = os.path.join(base_dir, 'Result', 'Node2Vec_embeddings.csv')
+# Path untuk menyimpan hasil
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+ACTOR_EMBEDDING_FILE = os.path.join(BASE_DIR, 'Result', 'node2vec_actor_embeddings.csv')
+GENRE_EMBEDDING_FILE = os.path.join(BASE_DIR, 'Result', 'node2vec_genre_embeddings.csv')
 
-GRAPH_NAME = "movieGraph"
-EMBEDDING_PROPERTY = "graph_embedding"
+GRAPH_NAMES = {
+    'actor': 'actorGraph',
+    'genre': 'genreGraph'
+}
 
-def drop_existing_graph(graph):
-    logger.info(f"Memeriksa graf '{GRAPH_NAME}'...")
-    result = graph.run(f"CALL gds.graph.exists('{GRAPH_NAME}') YIELD exists RETURN exists").data()
-    if result and result[0]['exists']:
-        logger.info(f"Menghapus graf '{GRAPH_NAME}' yang sudah ada...")
-        graph.run(f"CALL gds.graph.drop('{GRAPH_NAME}', false) YIELD graphName")
-    logger.info("Graf siap dibuat ulang.")
+def drop_existing_graphs():
+    """Hapus graph projection yang sudah ada"""
+    for gtype in GRAPH_NAMES.values():
+        logger.info(f"Memeriksa graph '{gtype}'...")
+        result = graph.run(f"CALL gds.graph.exists('{gtype}') YIELD exists RETURN exists").data()
+        if result and result[0]['exists']:
+            logger.info(f"Menghapus graph '{gtype}'...")
+            graph.run(f"CALL gds.graph.drop('{gtype}', false)")
 
-def create_graph_projection(graph):
-    logger.info("Membuat graph projection...")
+def create_graph_projection(relationship_type):
+    """Buat graph projection untuk actor atau genre"""
+    graph_name = GRAPH_NAMES[relationship_type]
+    target_relationship = 'FEATURES' if relationship_type == 'actor' else 'HAS_GENRE'
+
+    logger.info(f"Membuat graph projection untuk {relationship_type}...")
     graph.run(f"""
         CALL gds.graph.project(
-            '{GRAPH_NAME}',
-            ['Movie', 'Genre', 'Actor'],
+            '{graph_name}',
+            ['Movie', '{relationship_type.capitalize()}'],
             {{
-                HAS_GENRE: {{ orientation: 'UNDIRECTED' }},
-                FEATURES: {{ orientation: 'UNDIRECTED' }}
+                {target_relationship}: {{
+                    orientation: 'UNDIRECTED'
+                }}
             }}
         )
     """)
-    logger.info("Graph projection berhasil dibuat.")
 
-def run_node2vec(graph):
-    logger.info("Menjalankan algoritma Node2Vec...")
+def run_node2vec(relationship_type):
+    """Jalankan Node2Vec untuk graph tertentu"""
+    graph_name = GRAPH_NAMES[relationship_type]
+    logger.info(f"Menjalankan Node2Vec untuk {relationship_type}...")
+
     result = graph.run(f"""
-        CALL gds.beta.node2vec.stream('{GRAPH_NAME}', {{
+        CALL gds.beta.node2vec.stream('{graph_name}', {{
             embeddingDimension: 128,
             walkLength: 80,
             returnFactor: 1.0,
             inOutFactor: 1.0
         }})
         YIELD nodeId, embedding
-        WITH nodeId, embedding
-        MATCH (n) WHERE id(n) = nodeId AND (n:Movie OR n:Genre OR n:Actor)
-        RETURN n.id AS id, embedding, labels(n)[0] AS label
+        WHERE gds.util.asNode(nodeId):Movie
+        RETURN gds.util.asNode(nodeId).id AS movieId, embedding
     """).data()
-    logger.info(f"Node2Vec selesai dijalankan. Total node: {len(result)}")
+
+    logger.info(f"Berhasil memproses {len(result)} film untuk {relationship_type}")
     return result
 
-def normalize_and_store_embeddings(graph, records):
+def process_embeddings(embeddings, relationship_type):
+    """Normalisasi dan simpan embedding ke database"""
     valid_embeddings = []
+    prop_name = f"{relationship_type}_embedding"
 
-    for record in records:
-        node_id = record['id']
-        embedding = np.array(record['embedding'])
-
-        if embedding is None or np.all(embedding == 0):
-            logger.warning(f"Skipping node ID {node_id}: embedding kosong atau nol.")
-            continue
-
+    for record in embeddings:
         try:
+            movie_id = record['movieId']
+            embedding = np.array(record['embedding'])
             normalized = embedding / np.linalg.norm(embedding)
-            if record['label'] == 'Movie':
-                graph.run("""
-                    MATCH (n:Movie {id: $id})
-                    SET n.graph_embedding = $embedding
-                """, id=node_id, embedding=normalized.tolist())
 
-                valid_embeddings.append({
-                    'id': node_id,
-                    'embedding': normalized.tolist(),
-                    'type': 'Movie'
-                })
+            graph.run(f"""
+                MATCH (m:Movie {{id: $id}})
+                SET m.{prop_name} = $embedding
+            """, id=movie_id, embedding=normalized.tolist())
 
-            logger.info(f"Embedding sukses untuk {record['label']} ID: {node_id}")
-
+            valid_embeddings.append({
+                'movieId': movie_id,
+                'embedding': normalized.tolist(),
+                'type': relationship_type
+            })
         except Exception as e:
-            logger.error(f"Error saat memproses node ID {node_id}: {e}")
+            logger.error(f"Error processing {movie_id}: {str(e)}")
 
     return valid_embeddings
 
-def save_embeddings(embeddings):
-    if not embeddings:
-        logger.warning("Tidak ada embedding valid untuk disimpan.")
-        return
-
+def save_to_csv(embeddings, relationship_type):
+    """Simpan hasil embedding ke file CSV"""
     df = pd.DataFrame(embeddings)
-    df.to_csv(EMBEDDING_FILE, index=False)
-    logger.info(f"Embeddings disimpan ke '{EMBEDDING_FILE}'")
-
-    embedding_values = np.array([e['embedding'] for e in embeddings])
-    logger.info("Statistik embedding:")
-    logger.info(f"Shape: {embedding_values.shape}")
-    logger.info(f"Mean: {np.mean(embedding_values):.4f}")
-    logger.info(f"Std: {np.std(embedding_values):.4f}")
-    logger.info(f"Min: {np.min(embedding_values):.4f}")
-    logger.info(f"Max: {np.max(embedding_values):.4f}")
+    file_path = ACTOR_EMBEDDING_FILE if relationship_type == 'actor' else GENRE_EMBEDDING_FILE
+    df.to_csv(file_path, index=False)
+    logger.info(f"Embeddings {relationship_type} disimpan di {file_path}")
 
 def main():
     total_start = time.time()
-
-    drop_existing_graph(graph)
-    create_graph_projection(graph)
-    records = run_node2vec(graph)
-    embeddings = normalize_and_store_embeddings(graph, records)
-    save_embeddings(embeddings)
-
-    logger.info(f"Total waktu eksekusi Node2Vec: {time.time() - total_start:.2f} detik")
+    
+    try:
+        # 1. Hapus graph yang ada
+        drop_existing_graphs()
+        
+        # 2. Proses untuk aktor dan genre secara terpisah
+        for relationship_type in ['actor', 'genre']:
+            # Buat graph projection
+            create_graph_projection(relationship_type)
+            
+            # Jalankan FastRP
+            raw_embeddings = run_node2vec(relationship_type)
+            
+            # Proses dan simpan embeddings
+            processed = process_embeddings(raw_embeddings, relationship_type)
+            save_to_csv(processed, relationship_type)
+            
+    except Exception as e:
+        logger.error(f"Error utama: {str(e)}")
+    finally:
+        logger.info(f"Total waktu eksekusi: {time.time() - total_start:.2f} detik")
 
 if __name__ == "__main__":
     main()
